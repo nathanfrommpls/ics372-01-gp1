@@ -1,18 +1,29 @@
 UI
 
 Store (Facade)
+
 	* 1
+	
 	* 2
+	
 	* 3
+	
 	* 4
+	
  	…
+ 	
 	* 15
 
 Inventory
+
 	* newProduct
+	
 	* removingProduct
+	
 	* getProductInfo
+	
 	* updateProduct
+	
 - Product
 	- id
 	- Name
@@ -21,10 +32,15 @@ Inventory
 	- Price
 
 MemberList
+
 	* newMember
+	
 	* removingMember
+	
 	* getMemberInfo
+	
 	* updateProduct
+	
 - Members
 	- id
 	- name
@@ -35,10 +51,15 @@ MemberList
 
 
 OrderList
+
 	* newOrder
+	
 	* removingOrder
+	
 	* getOrderInfo
+	
 	* updateOrder
+	
 - Order
 	- id (order)
 	- id (product)
@@ -47,10 +68,15 @@ OrderList
 
 
 TransactionHistory
+
 	* newTransaction
+	
 	* removingTransaction
+	
 	* getTransactionInfo
+	
 	* updateTransaction
+	
 - Transaction
 	- id (memberid)
 	- date
