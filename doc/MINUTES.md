@@ -15,7 +15,11 @@ Due for next group meeting on 2/26:
 - Conceptual Diagram for both
 
 Andrew: 1 & 2
+
 Keith: 3 & 6
+
 Daniel: 9 & 7
+
 Rae: 8, 5 & 11
+
 Nathan: 10, 4, & 12
