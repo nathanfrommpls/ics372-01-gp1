@@ -23,3 +23,7 @@ Daniel: 9 & 7
 Rae: 8, 5 & 11
 
 Nathan: 10, 4, & 12
+
+## Group Meeting February 26th, 2021 Common Era
+Talked through preliminary class designs, see class_design_notes.md, for us each
+to update sequence diagrams.
