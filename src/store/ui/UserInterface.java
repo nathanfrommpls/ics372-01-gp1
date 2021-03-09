@@ -71,7 +71,7 @@ public class UserInterface {
 		+ "  " + PRINT_TRANSACTIONS + ": Print Transactions.\t" + LIST_OUTSTANDING_ORDERS + ": List all outstanding orders.\n"
 		+ "  " + LIST_ALL_MEMBERS + ": List all members.\t\t" + LIST_ALL_PRODUCTS + ": List all products.\n"
 		+ "  " + SAVE + ": Save.\t\t\t" + HELP + ": Help.\n"
-		+ "  " + EXIT + ": Exit."
+		+ "  " + EXIT + ": Exit.\n"
 		);
 	}
 	
@@ -79,13 +79,58 @@ public class UserInterface {
 		int selection;
 		logo();
 		help();
-		
+        while ((selection = getSelection()) != EXIT) {
+            switch (selection) {
+            case ENROLL_MEMBER:
+                System.out.println("You enrolled that member yo!");
+                break;
+            case REMOVE_MEMBER:
+                System.out.println("You removed that member yo!");
+                break;
+            case ADD_PRODUCT:
+                System.out.println("You added that product yo!");
+                break;
+            case CHECKOUT:
+                System.out.println("You checked out yo!");
+                break;
+            case PROCESS_SHIPMENT:
+                System.out.println("New shipment yo!");
+                break;
+            case CHANGE_PRICE:
+                System.out.println("Its changed yo!");
+                break;
+            case RETRIEVE_PRODUCT_INFO:
+                System.out.println("Here's your product info yo!");
+                break;
+            case RETRIEVE_MEMBER_INFO:
+                System.out.println("Here's your member info yo!");
+                break;
+            case PRINT_TRANSACTIONS:
+                System.out.println("Here's your transactions yo!");
+                break;
+            case LIST_OUTSTANDING_ORDERS:
+                System.out.println("We haven't received these yet yo!");
+                break;
+            case LIST_ALL_MEMBERS:
+                System.out.println("Here's everyone yo!");
+                break;
+            case LIST_ALL_PRODUCTS:
+                System.out.println("Here's everything yo!");
+                break;
+            case SAVE:
+                System.out.println("Your deeds have been written to the imperial scrolls of honor.");
+                break;
+            case HELP:
+                help();
+                break;
+            }
+        }
 	}
 	
-    public int getCommand() {
+    public int getSelection() {
         do {
             try {
-                int value = Integer.parseInt(getToken("Enter command:" + HELP + " for help"));
+                int value = Integer.parseInt(getToken("Please select the function you'd like to perform:"));
                 if (value >= EXIT && value <= HELP) {
                     return value;
                 }
