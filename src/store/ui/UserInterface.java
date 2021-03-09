@@ -124,26 +124,34 @@ public class UserInterface {
                 help();
                 break;
             }
+            
+            try {
+                Thread.sleep(5000);
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
         }
 	}
 	
     public int getSelection() {
         do {
             try {
-                int value = Integer.parseInt(getToken("Please select the function you'd like to perform:"));
+            	logo();
+            	help();
+                int value = Integer.parseInt(getToken());
                 if (value >= EXIT && value <= HELP) {
                     return value;
                 }
             } catch (NumberFormatException nfe) {
                 System.out.println("Enter a number");
             }
+
         } while (true);
     }
     
-    public String getToken(String prompt) {
+    public String getToken() {
         do {
             try {
-                System.out.println(prompt);
                 String line = reader.readLine();
                 StringTokenizer tokenizer = new StringTokenizer(line, "\n\r\f");
                 if (tokenizer.hasMoreTokens()) {
