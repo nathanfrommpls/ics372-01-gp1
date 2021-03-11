@@ -5,10 +5,12 @@ import java.util.StringTokenizer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
+import java.util.Hashtable;
 
 public class UserInterface {
 	private static UserInterface userInterface;
-	private static Store store;
+	private static Store store = Store.instance();
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static final int EXIT = 0;
     private static final int ENROLL_MEMBER = 1;
@@ -43,8 +45,7 @@ public class UserInterface {
     }
 	
 	public void logo() {
-		System.out.println("︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿\n"
-		+ "\n"
+		System.out.println("\n\n"
 		+ "                  WELCOME TO THE\n"
 		+ "   ____  _____ ____    ____  _____     _______ ____  \n"
 		+ "  |  _ \\| ____|  _ \\  |  _ \\|_ _\\ \\   / / ____|  _ \\ \n"
@@ -57,8 +58,7 @@ public class UserInterface {
 		+ "       | |  | | | | | | | |_) |  _| | |_) |  / _ \\ | |  | | \\ \\ / /|  _|  \n"
 		+ "       | |__| |_| | |_| |  __/| |___|  _ <  / ___ \\| |  | |  \\ V / | |___ \n"
 		+ "        \\____\\___/ \\___/|_|   |_____|_| \\_\\/_/   \\_\\_| |___|  \\_/  |_____|\n"
-		+ "\n"
-		+ "︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿\n");
+		+ "\n\n");
 	}
 	
 	public void help() {
@@ -82,62 +82,67 @@ public class UserInterface {
         while ((selection = getSelection()) != EXIT) {
             switch (selection) {
             case ENROLL_MEMBER:
-                System.out.println("You enrolled that member yo!");
+            	enrollMember();
                 break;
             case REMOVE_MEMBER:
-                System.out.println("You removed that member yo!");
+            	removeMember();
                 break;
             case ADD_PRODUCT:
-                System.out.println("You added that product yo!");
+            	addProduct();
                 break;
             case CHECKOUT:
-                System.out.println("You checked out yo!");
+            	checkout();
                 break;
             case PROCESS_SHIPMENT:
-                System.out.println("New shipment yo!");
+            	processShipment();
                 break;
             case CHANGE_PRICE:
-                System.out.println("Its changed yo!");
+            	changePrice();
                 break;
             case RETRIEVE_PRODUCT_INFO:
-                System.out.println("Here's your product info yo!");
+            	retrieveProductInfo();
                 break;
             case RETRIEVE_MEMBER_INFO:
-                System.out.println("Here's your member info yo!");
+            	retrieveMemberInfo();
                 break;
             case PRINT_TRANSACTIONS:
-                System.out.println("Here's your transactions yo!");
+            	printTransactions();
                 break;
             case LIST_OUTSTANDING_ORDERS:
-                System.out.println("We haven't received these yet yo!");
+            	listOutstandingOrders();
                 break;
             case LIST_ALL_MEMBERS:
-                System.out.println("Here's everyone yo!");
+            	listAllMembers();
                 break;
             case LIST_ALL_PRODUCTS:
-                System.out.println("Here's everything yo!");
+            	listAllProducts();
                 break;
             case SAVE:
-                System.out.println("Your deeds have been written to the imperial scrolls of honor.");
+            	save();
                 break;
             case HELP:
-                help();
+                // Help will print because of loop
                 break;
             }
             
+            /*
+             *  Remove sleep after methods are complete. 
+             */
             try {
                 Thread.sleep(5000);
             } catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
+            logo();
+            help();
         }
+        
+        System.exit(0);
 	}
 	
     public int getSelection() {
         do {
             try {
-            	logo();
-            	help();
                 int value = Integer.parseInt(getToken());
                 if (value >= EXIT && value <= HELP) {
                     return value;
@@ -163,4 +168,85 @@ public class UserInterface {
         } while (true);
     }
 
+    private void enrollMember() {
+    	// Update input details.
+    	String name = null;
+    	String address = null;
+    	String phoneNumber = null;
+    	Date joined = new Date();
+    	boolean paid = false;
+    	
+    	System.out.println(Integer.toString(store.enrollMember(name, address,
+    	phoneNumber, joined, paid)));
+    }
+    
+    private void removeMember() {
+    	// Update input details.
+    	int memberId = 123456;
+    	store.removeMember(memberId);
+    }
+    
+    private void addProduct() {
+    	// Update input details.
+    	String name = null;
+    	int reorderLevel = 10;
+    	int priceDollars = 0;
+    	int priceCents = 0;
+    	System.out.println(store.addProduct(name,reorderLevel,priceDollars,
+    	priceCents));
+    }
+    
+    private void checkout() {
+    	// Update input details.
+    	Hashtable<String,Integer> cart = new Hashtable<String,Integer>();
+    	System.out.println(store.checkout(cart));
+    }
+    
+    private void processShipment() {
+    	// Update input details.
+    	Hashtable<String,Integer> shipment = new Hashtable<String,Integer>();
+    	System.out.println(store.processShipment(shipment));
+    }
+    
+    private void changePrice() {
+    	// Update input details.
+    	int productId = 123456;
+    	int priceDollars = 10;
+    	int priceCents = 0;
+    	store.changePrice(productId,priceDollars,priceCents);
+    }
+    
+    private void retrieveProductInfo() {
+    	// Update input details.
+    	int productId = 123456;
+    	System.out.println(store.retrieveProductInfo(productId));
+    }
+    
+    private void retrieveMemberInfo() {
+    	// Update input details.
+    	int memberId = 123456;
+    	System.out.println(store.retrieveMemberInfo(memberId));
+    }
+    
+    private void printTransactions() {
+    	// Update input details.
+    	int memberId = 123456;
+    	store.printTransactions(memberId);
+    }
+    
+    private void listOutstandingOrders() {
+    	System.out.println(store.listOutstandingOrders());
+    }
+    
+    private void listAllMembers() {
+    	System.out.println(store.listAllMembers());
+    }
+    
+    private void listAllProducts() {
+    	System.out.println(store.listAllProducts());
+    }
+    
+    private void save() {
+    	store.save();
+    }
 }
