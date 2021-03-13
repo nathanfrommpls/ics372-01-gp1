@@ -1,17 +1,23 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import store.entities.Product;
 
 public class Transaction implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Calendar date;
 	private int memberID;
-	private int productID;
+	private int transactionID;
+	private static int idCounter;
+	private ArrayList<Product> list = new ArrayList<Product>();
 
 	public Transaction(int memberID) {
-		super();
 		this.date = new GregorianCalendar();
 		this.memberID = memberID;
+		this.transactionID = idCounter;
+		idCounter++;
 	}
 
 	public boolean onDate(Calendar date) {
@@ -28,8 +34,8 @@ public class Transaction implements Serializable {
 		return memberID;
 	}
 
-	public int getProductID() {
-		return productID;
+	public int getTransactionID() {
+		return transactionID;
 	}
 
 	public void setDate(Calendar date) {
@@ -40,7 +46,7 @@ public class Transaction implements Serializable {
 		this.memberID = memberID;
 	}
 
-	public void setProductID(int productID) {
-		this.productID = productID;
+	public void setTransactionID(int transactionID) {
+		this.transactionID = transactionID;
 	}
 }
