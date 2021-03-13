@@ -1,9 +1,9 @@
+package store.entities;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
-import store.entities.Product;
 
 public class Transaction implements Serializable {
 	private static final long serialVersionUID = 1L;
