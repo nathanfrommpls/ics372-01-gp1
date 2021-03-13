@@ -20,7 +20,7 @@ public class Order implements Serializable {
 		return id;
 	}
 
-	public String getProduct() {
+	public Product getProduct() {
 		return product;
 	}
 
