@@ -2,6 +2,8 @@ package store.entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 public class Member implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -13,11 +15,12 @@ public class Member implements Serializable {
 	private boolean feePaid;
 	private static final String MEMBER_STRING = "XM";
 	private static int idCounter;
+	private TransactionList membersTransactions = new TransactionList();
 
-	public Member(String name, String address, Calendar dateJoined, String phoneNumber) {
+	public Member(String name, String address, String phoneNumber) {
 		this.name = name;
 		this.address = address;
-		this.dateJoined = dateJoined;
+		this.dateJoined = new GregorianCalendar();
 		this.phoneNumber = phoneNumber;
 		id = MEMBER_STRING + ++idCounter;
 	}
@@ -60,6 +63,14 @@ public class Member implements Serializable {
 
 	public void setFeePaid(boolean feePaid) {
 		this.feePaid = feePaid;
+	}
+
+	public void addMemberTransaction(Transaction transaction) {
+		membersTransactions.addTransaction(transaction);
+	}
+
+	public Iterator<Transaction> iterator() {
+		return membersTransactions.iterator();
 	}
 
 	/**
